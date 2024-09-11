@@ -12,33 +12,25 @@ struct CardView: View {
     @State private var degrees: CGFloat = 0
     @State private var currentImageIndex = 0
     
-    @State private var mockImage = [
-        "michel",
-        "lisa",
-        "max",
-        "nam",
-        "mark",
-        "peter",
-        "tom"
-    ]
+    let model: CardModel
     
     var body: some View {
         ZStack(alignment: .bottom) {
             ZStack(alignment: .top) {
-                Image(mockImage[currentImageIndex])
+                Image(user.profileImageUrls[currentImageIndex])
                     .resizable()
                     .scaledToFill()
+                    .frame(width: SizeConstant.cardWidth, height: SizeConstant.cardHeight)
                     .overlay {
-                        ImageSrollingOverlay(currentImageIndex: $currentImageIndex, currentIndex: mockImage.count)
+                        ImageSrollingOverlay(currentImageIndex: $currentImageIndex, currentIndex: imageCount)
                     }
                 
                 SwipeActionIndicatorView(xOffset: $xOffset)
                 
-                CardImageIndicatorView(currentImageIndex: currentImageIndex, imageCount: mockImage.count)
+                CardImageIndicatorView(currentImageIndex: currentImageIndex, imageCount: imageCount)
             }
             
-            UserInfoView()
-                .padding(.horizontal)
+            UserInfoView(user: user)
         }
         .frame(width: SizeConstant.cardWidth, height: SizeConstant.cardHeight)
         .clipShape(RoundedRectangle(cornerRadius: 10))
@@ -50,6 +42,16 @@ struct CardView: View {
                 .onChanged(onDragChanged)
                 .onEnded(onDragEnded)
         )
+    }
+}
+
+private extension CardView {
+    var user: User {
+        return model.user
+    }
+    
+    var imageCount: Int {
+        return user.profileImageUrls.count
     }
 }
 
@@ -91,5 +93,5 @@ private extension CardView {
 }
 
 #Preview {
-    CardView()
+    CardView(model: CardModel(user: MockData.users[1]))
 }
