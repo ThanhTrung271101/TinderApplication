@@ -10,13 +10,13 @@ import SwiftUI
 struct CardView: View {
     @State private var xOffset: CGFloat = 0
     @State private var degrees: CGFloat = 0
-    @State private var currentImageIndex = 1
+    @State private var currentImageIndex = 0
     
     @State private var mockImage = [
+        "michel",
         "lisa",
         "max",
         "nam",
-        "michel",
         "mark",
         "peter",
         "tom"
@@ -54,6 +54,23 @@ struct CardView: View {
 }
 
 private extension CardView {
+    func returnToCenter() {
+        xOffset = 0
+        degrees = 0
+    }
+    
+    func swipeRight() {
+        xOffset = 500
+        degrees = 12
+    }
+    
+    func swipeLeft() {
+        xOffset = -500
+        degrees = -12
+    }
+}
+
+private extension CardView {
     func onDragChanged(_ value: _ChangedGesture<DragGesture>.Value) {
         xOffset = value.translation.width
         degrees = Double(value.translation.width / 25)
@@ -62,8 +79,13 @@ private extension CardView {
         let width = value.translation.width
         
         if abs(width) <= abs(SizeConstant.screenCutoff) {
-            xOffset = 0
-            degrees = 0
+            returnToCenter()
+            return
+        }
+        if width >= SizeConstant.screenCutoff {
+            swipeRight()
+        } else {
+            swipeLeft()
         }
     }
 }
