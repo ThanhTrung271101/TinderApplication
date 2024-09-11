@@ -33,6 +33,8 @@ struct CardView: View {
                     }
                 
                 SwipeActionIndicatorView(xOffset: $xOffset)
+                
+                CardImageIndicatorView(currentImageIndex: currentImageIndex, imageCount: mockImage.count)
             }
             
             UserInfoView()
