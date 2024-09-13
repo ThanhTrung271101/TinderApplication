@@ -8,38 +8,34 @@
 import SwiftUI
 
 struct CardView: View {
+    @ObservedObject var viewModel: CardsViewModel
     @State private var xOffset: CGFloat = 0
     @State private var degrees: CGFloat = 0
     @State private var currentImageIndex = 0
     
-    @State private var mockImage = [
-        "michel",
-        "lisa",
-        "max",
-        "nam",
-        "mark",
-        "peter",
-        "tom"
-    ]
+    let model: CardModel
     
     var body: some View {
         ZStack(alignment: .bottom) {
             ZStack(alignment: .top) {
-                Image(mockImage[currentImageIndex])
+                Image(user.profileImageUrls[currentImageIndex])
                     .resizable()
                     .scaledToFill()
+                    .frame(width: SizeConstant.cardWidth, height: SizeConstant.cardHeight)
                     .overlay {
-                        ImageSrollingOverlay(currentImageIndex: $currentImageIndex, currentIndex: mockImage.count)
+                        ImageSrollingOverlay(currentImageIndex: $currentImageIndex, currentIndex: imageCount)
                     }
                 
                 SwipeActionIndicatorView(xOffset: $xOffset)
                 
-                CardImageIndicatorView(currentImageIndex: currentImageIndex, imageCount: mockImage.count)
+                CardImageIndicatorView(currentImageIndex: currentImageIndex, imageCount: imageCount)
             }
             
-            UserInfoView()
-                .padding(.horizontal)
+            UserInfoView(user: user)
         }
+        .onReceive(viewModel.$buttonSwipeAction, perform: { action in
+            onReceiveSwipeAction(action)
+        })
         .frame(width: SizeConstant.cardWidth, height: SizeConstant.cardHeight)
         .clipShape(RoundedRectangle(cornerRadius: 10))
         .offset(x: xOffset)
@@ -54,19 +50,55 @@ struct CardView: View {
 }
 
 private extension CardView {
+    var user: User {
+        return model.user
+    }
+    
+    var imageCount: Int {
+        return user.profileImageUrls.count
+    }
+}
+
+private extension CardView {
     func returnToCenter() {
         xOffset = 0
         degrees = 0
     }
     
     func swipeRight() {
-        xOffset = 500
-        degrees = 12
+        withAnimation {
+            xOffset = 500
+            degrees = 12
+        } completion: {
+            viewModel.removeCard(model)
+        }
+
     }
     
     func swipeLeft() {
-        xOffset = -500
-        degrees = -12
+        withAnimation {
+            xOffset = -500
+            degrees = -12
+        } completion: {
+            viewModel.removeCard(model)
+        }
+    }
+    
+    func onReceiveSwipeAction(_ action: SwipeAction? ) {
+        guard let action else { return }
+        
+        let topCard = viewModel.cardModels.last
+        
+        if topCard == model {
+            switch action {
+            case .reject:
+                swipeLeft()
+            case .like:
+                swipeRight()
+            }
+        } else {
+            
+        }
     }
 }
 
@@ -91,5 +123,5 @@ private extension CardView {
 }
 
 #Preview {
-    CardView()
+    CardView(viewModel: CardsViewModel(service: CardService()), model: CardModel(user: MockData.users[0]))
 }

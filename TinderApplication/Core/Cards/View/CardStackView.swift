@@ -8,10 +8,18 @@
 import SwiftUI
 
 struct CardStackView: View {
+    @StateObject var viewModel = CardsViewModel(service: CardService())
     var body: some View {
-        ZStack {
-            ForEach(0 ..< 20) { _ in
-                CardView()
+        VStack() {
+            ZStack {
+                ForEach(viewModel.cardModels) { card in
+                    CardView(viewModel: viewModel, model: card)
+                }
+            }
+            
+            if !viewModel.cardModels.isEmpty {
+                SwipeActionButtonView(viewModel: viewModel)
+
             }
         }
     }
