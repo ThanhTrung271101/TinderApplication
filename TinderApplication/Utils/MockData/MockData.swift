@@ -14,7 +14,7 @@ struct MockData {
             fullName: "Bruce Wayne",
             age: 30,
             profileImageUrls: [
-                "batman",
+                "lisa",
                 "nam",
                 "michel",
                 "max"
