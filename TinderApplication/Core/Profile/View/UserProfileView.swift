@@ -50,7 +50,7 @@ struct UserProfileView: View {
                         CardImageIndicatorView(currentImageIndex: currentImageIndex, imageCount: user.profileImageUrls.count)
                     }
                     
-                    VStack {
+                    VStack(alignment: .leading, spacing: 12) {
                         Text("About me")
                             .fontWeight(.semibold)
                         
@@ -62,6 +62,46 @@ struct UserProfileView: View {
                     .font(.subheadline)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                 }
+                
+                VStack(alignment: .leading, spacing: 12) {
+                    Text("Essentials")
+                        .fontWeight(.semibold)
+                    
+                    HStack {
+                        Image(systemName: "person")
+                        
+                        Text("Woman")
+                        
+                        Spacer()
+                    }
+                    
+                    Divider()
+                    
+                    HStack {
+                        Image(systemName: "arrow.up.backward.and.arrow.down.forward.circle")
+                        
+                        Text("Straight")
+                        
+                        Spacer()
+                    }
+                    
+                    Divider()
+                    
+                    HStack {
+                        Image(systemName: "book")
+                        
+                        Text("Actress")
+                        
+                        Spacer()
+                    }
+                    
+                    Divider()
+
+                }
+                .padding()
+                .background(Color(.secondarySystemBackground))
+                .font(.subheadline)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
             }
         }
     }
