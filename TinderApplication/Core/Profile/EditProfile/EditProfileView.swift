@@ -53,44 +53,44 @@ struct EditProfileView: View {
                         .background(Color(.secondarySystemBackground))
                         .font(.subheadline)
                     }
-                }
-                
-                VStack(alignment: .leading) {
-                    Text("GENDER")
-                        .fontWeight(.bold)
-                        .padding(.leading)
-                        .font(.subheadline)
                     
-                    HStack {
-                        Text("Man")
+                    VStack(alignment: .leading) {
+                        Text("GENDER")
+                            .fontWeight(.bold)
+                            .padding(.leading)
+                            .font(.subheadline)
                         
-                        Spacer()
-                        
-                        Image(systemName: "chevron.right")
-                            .imageScale(.small)
-                    }
-                    .padding()
-                    .background(Color(.secondarySystemBackground))
-                    .font(.subheadline)
-                }
-                
-                VStack(alignment: .leading) {
-                    Text("SEXUAL ORIENTATION")
-                        .fontWeight(.bold)
-                        .padding(.leading)
+                        HStack {
+                            Text("Man")
+                            
+                            Spacer()
+                            
+                            Image(systemName: "chevron.right")
+                                .imageScale(.small)
+                        }
+                        .padding()
+                        .background(Color(.secondarySystemBackground))
                         .font(.subheadline)
-                    
-                    HStack {
-                        Text("Straight")
-                        
-                        Spacer()
-                        
-                        Image(systemName: "chevron.right")
-                            .imageScale(.small)
                     }
-                    .padding()
-                    .background(Color(.secondarySystemBackground))
-                    .font(.subheadline)
+                    
+                    VStack(alignment: .leading) {
+                        Text("SEXUAL ORIENTATION")
+                            .fontWeight(.bold)
+                            .padding(.leading)
+                            .font(.subheadline)
+                        
+                        HStack {
+                            Text("Straight")
+                            
+                            Spacer()
+                            
+                            Image(systemName: "chevron.right")
+                                .imageScale(.small)
+                        }
+                        .padding()
+                        .background(Color(.secondarySystemBackground))
+                        .font(.subheadline)
+                    }
                 }
             }
             .scrollIndicators(.hidden)
