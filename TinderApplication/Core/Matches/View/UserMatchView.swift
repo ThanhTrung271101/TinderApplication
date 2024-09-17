@@ -9,6 +9,7 @@ import SwiftUI
 
 struct UserMatchView: View {
     @Binding var show: Bool
+    @EnvironmentObject var matchManager: MatchManager
     var body: some View {
         ZStack {
             Rectangle()
@@ -21,7 +22,9 @@ struct UserMatchView: View {
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         
-                    Text("You and Kelly have liked each other.")
+                    if let matchUser = matchManager.matchUser {
+                        Text("You and \(matchUser.fullName) have liked each other.")
+                    }
                 }
                 .foregroundStyle(Color(.white))
                 
@@ -37,22 +40,24 @@ struct UserMatchView: View {
                                 .shadow(radius: 4)
                         }
                     
-                    Image(MockData.users[1].profileImageUrls[1])
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 150, height: 150)
-                        .clipShape(Circle())
-                        .overlay {
-                            Circle()
-                                .stroke(.white, lineWidth: 2)
-                                .shadow(radius: 4)
-                        }
+                    if let matchUser = matchManager.matchUser {
+                        Image(matchUser.profileImageUrls[1])
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 150, height: 150)
+                            .clipShape(Circle())
+                            .overlay {
+                                Circle()
+                                    .stroke(.white, lineWidth: 2)
+                                    .shadow(radius: 4)
+                            }
+                    }
                 }
                 
                 VStack(spacing: 16) {
                     
                     Button {
-                        
+                        show.toggle()
                     } label: {
                         Text("Send Message")
                     }
@@ -64,7 +69,7 @@ struct UserMatchView: View {
                     .clipShape(Capsule())
                     
                     Button {
-                        
+                        show.toggle()
                     } label: {
                         Text("Keep Swiping")
                     }
@@ -87,4 +92,5 @@ struct UserMatchView: View {
 
 #Preview {
     UserMatchView(show: .constant(true))
+        .environmentObject(MatchManager())
 }
