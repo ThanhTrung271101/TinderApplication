@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProfileImageGridView: View {
     let user: User
-    
+
     var body: some View {
         LazyVGrid(columns: columns, spacing: 16) {
             ForEach(0 ..< 9) { index in
@@ -24,9 +24,9 @@ struct ProfileImageGridView: View {
                         RoundedRectangle(cornerRadius: 10)
                             .foregroundStyle(Color(.secondarySystemBackground))
                             .frame(width: imageWidth, height: imageHeight)
-                        
+
                         Button {
-                            
+
                         } label: {
                             Image(systemName: "plus.circle.fill")
                                 .imageScale(.large)
@@ -48,11 +48,11 @@ private extension ProfileImageGridView {
             .init(.flexible())
         ]
     }
-    
+
     var imageWidth: CGFloat {
         return 110
     }
-    
+
     var imageHeight: CGFloat {
         return 160
     }

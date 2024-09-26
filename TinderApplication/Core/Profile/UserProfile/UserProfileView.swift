@@ -11,19 +11,19 @@ struct UserProfileView: View {
     @Environment(\.dismiss) var dismiss
     @State private var currentImageIndex = 0
     let user: User
-    
+
     var body: some View {
         VStack {
             HStack {
                 Text(user.fullName)
                     .font(.title2)
                     .fontWeight(.semibold)
-                
+
                 Text("\(user.age)")
                     .font(.title2)
-                
+
                 Spacer()
-                
+
                 Button {
                     dismiss()
                 } label: {
@@ -35,7 +35,7 @@ struct UserProfileView: View {
                 }
             }
             .padding(.horizontal)
-            
+
             ScrollView {
                 VStack {
                     ZStack(alignment: .top) {
@@ -44,16 +44,22 @@ struct UserProfileView: View {
                             .scaledToFill()
                             .frame(width: SizeConstant.cardWidth, height: SizeConstant.cardHeight)
                             .overlay {
-                                ImageSrollingOverlay(currentImageIndex: $currentImageIndex, currentIndex: user.profileImageUrls.count)
+                                ImageSrollingOverlay(
+                                    currentImageIndex: $currentImageIndex,
+                                    currentIndex: user.profileImageUrls.count
+                                )
                             }
-                        
-                        CardImageIndicatorView(currentImageIndex: currentImageIndex, imageCount: user.profileImageUrls.count)
+
+                        CardImageIndicatorView(
+                            currentImageIndex: currentImageIndex,
+                            imageCount: user.profileImageUrls.count
+                        )
                     }
-                    
+
                     VStack(alignment: .leading, spacing: 12) {
                         Text("About me")
                             .fontWeight(.semibold)
-                        
+
                         Text("Some text for bio now ...")
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -62,39 +68,39 @@ struct UserProfileView: View {
                     .font(.subheadline)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                 }
-                
+
                 VStack(alignment: .leading, spacing: 12) {
                     Text("Essentials")
                         .fontWeight(.semibold)
-                    
+
                     HStack {
                         Image(systemName: "person")
-                        
+
                         Text("Woman")
-                        
+
                         Spacer()
                     }
-                    
+
                     Divider()
-                    
+
                     HStack {
                         Image(systemName: "arrow.up.backward.and.arrow.down.forward.circle")
-                        
+
                         Text("Straight")
-                        
+
                         Spacer()
                     }
-                    
+
                     Divider()
-                    
+
                     HStack {
                         Image(systemName: "book")
-                        
+
                         Text("Actress")
-                        
+
                         Spacer()
                     }
-                    
+
                     Divider()
 
                 }

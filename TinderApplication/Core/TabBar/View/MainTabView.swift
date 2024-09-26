@@ -13,15 +13,15 @@ struct MainTabView: View {
             CardStackView()
                 .tabItem { Image(systemName: "flame") }
                 .tag(0)
-            
+
             Text("Search View")
                 .tabItem { Image(systemName: "magnifyingglass") }
                 .tag(1)
-            
+
             Text("Inbox View")
                 .tabItem { Image(systemName: "bubble.left.and.bubble.right.fill") }
                 .tag(2)
-            
+
             CurrentUserProfileView(user: MockData.users[1])
                 .tabItem { Image(systemName: "person") }
                 .tag(3)

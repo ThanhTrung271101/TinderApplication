@@ -16,7 +16,7 @@ struct ImageSrollingOverlay: View {
                 .onTapGesture {
                     updateImageIndex(increment: false)
                 }
-            
+
             Rectangle()
                 .onTapGesture {
                     updateImageIndex(increment: true)

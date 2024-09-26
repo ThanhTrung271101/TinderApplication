@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SwipeActionButtonView: View {
     @ObservedObject var viewModel: CardsViewModel
-    
+
     var body: some View {
         HStack(spacing: 32) {
             Button {
@@ -26,7 +26,7 @@ struct SwipeActionButtonView: View {
                     )
             }
             .frame(width: 48, height: 48)
-            
+
             Button {
                 viewModel.buttonSwipeAction = .like
             } label: {

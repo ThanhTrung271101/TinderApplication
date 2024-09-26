@@ -10,7 +10,7 @@ import SwiftUI
 struct CurrentUserProfileView: View {
     @State private var showEditProfile = false
     let user: User
-    
+
     var body: some View {
         NavigationStack {
             List {
@@ -19,31 +19,31 @@ struct CurrentUserProfileView: View {
                     .onTapGesture {
                         showEditProfile.toggle()
                     }
-                
+
                 // account
                 Section("Account Information") {
                     HStack {
                         Text("Name")
-                        
+
                         Spacer()
-                        
+
                         Text(user.fullName)
                     }
-                    
+
                     HStack {
                         Text("Email")
-                        
+
                         Spacer()
-                        
+
                         Text("testemail@gmail.com")
                     }
                 }
-                
+
                 // legal
                 Section("Legal") {
                     Text("Term of Service")
                 }
-                
+
                 // log out/delete
                 Section {
                     Button {
@@ -51,10 +51,10 @@ struct CurrentUserProfileView: View {
                     } label: {
                         Text("Log out")
                     }
-                    
+
                 }
                 .foregroundStyle(Color(.red))
-                
+
                 Section {
                     Button {
                         print("DEBUG: Delete account here ...")

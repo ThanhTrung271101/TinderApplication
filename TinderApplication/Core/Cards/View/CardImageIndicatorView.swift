@@ -10,7 +10,7 @@ import SwiftUI
 struct CardImageIndicatorView: View {
     let currentImageIndex: Int
     let imageCount: Int
-    
+
     var body: some View {
         HStack {
             ForEach(0 ..< imageCount, id: \.self) { index in
