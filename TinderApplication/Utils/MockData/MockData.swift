@@ -26,7 +26,7 @@ struct MockData {
             age: 30,
             profileImageUrls: [
                 "david-beckham-1",
-                "david-beckham-2",
+                "david-beckham-2"
             ]
         ),
         .init(
@@ -35,8 +35,8 @@ struct MockData {
             age: 30,
             profileImageUrls: [
                 "conor-mcgregor-1",
-                "conor-mcgregor-2",
+                "conor-mcgregor-2"
             ]
-        ),
+        )
     ]
 }

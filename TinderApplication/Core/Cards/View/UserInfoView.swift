@@ -9,7 +9,7 @@ import SwiftUI
 
 struct UserInfoView: View {
     @Binding var showProfileModal: Bool
-    
+
     let user: User
     var body: some View {
         VStack(alignment: .leading) {
@@ -20,9 +20,9 @@ struct UserInfoView: View {
                 Text("\(user.age)")
                     .font(.title)
                     .fontWeight(.semibold)
-                
+
                 Spacer()
-                
+
                 Button {
                     showProfileModal.toggle()
                 } label: {
@@ -31,7 +31,7 @@ struct UserInfoView: View {
                         .imageScale(.large)
                 }
             }
-            
+
             Text("Some bio test for now")
                 .font(.subheadline)
                 .lineLimit(2)

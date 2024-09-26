@@ -11,7 +11,7 @@ struct CurrentUserProfileHeaderView: View {
     let user: User
     var body: some View {
         VStack {
-            
+
             ZStack(alignment: .topTrailing) {
                 Image(user.profileImageUrls[1])
                     .resizable()
@@ -24,8 +24,7 @@ struct CurrentUserProfileHeaderView: View {
                             .frame(width: 128, height: 128)
                             .shadow(radius: 10)
                     }
-                
-                
+
                 Image(systemName: "pencil")
                     .imageScale(.small)
                     .foregroundStyle(Color(.gray))
@@ -36,7 +35,7 @@ struct CurrentUserProfileHeaderView: View {
                     }
                     .offset(x: -8, y: 10)
             }
-            
+
             Text("\(user.fullName), \(user.age)")
                 .font(.title2)
                 .fontWeight(.light)

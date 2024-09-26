@@ -14,9 +14,9 @@ struct CardView: View {
     @State private var degrees: CGFloat = 0
     @State private var currentImageIndex = 0
     @State private var showProfileModal = false
-    
+
     let model: CardModel
-    
+
     var body: some View {
         ZStack(alignment: .bottom) {
             ZStack(alignment: .top) {
@@ -27,12 +27,12 @@ struct CardView: View {
                     .overlay {
                         ImageSrollingOverlay(currentImageIndex: $currentImageIndex, currentIndex: imageCount)
                     }
-                
+
                 SwipeActionIndicatorView(xOffset: $xOffset)
-                
+
                 CardImageIndicatorView(currentImageIndex: currentImageIndex, imageCount: imageCount)
             }
-            
+
             UserInfoView(showProfileModal: $showProfileModal, user: user)
         }
         .fullScreenCover(isPresented: $showProfileModal, content: {
@@ -58,7 +58,7 @@ private extension CardView {
     var user: User {
         return model.user
     }
-    
+
     var imageCount: Int {
         return user.profileImageUrls.count
     }
@@ -69,7 +69,7 @@ private extension CardView {
         xOffset = 0
         degrees = 0
     }
-    
+
     func swipeRight() {
         withAnimation {
             xOffset = 500
@@ -80,7 +80,7 @@ private extension CardView {
         }
 
     }
-    
+
     func swipeLeft() {
         withAnimation {
             xOffset = -500
@@ -89,12 +89,12 @@ private extension CardView {
             viewModel.removeCard(model)
         }
     }
-    
+
     func onReceiveSwipeAction(_ action: SwipeAction? ) {
         guard let action else { return }
-        
+
         let topCard = viewModel.cardModels.last
-        
+
         if topCard == model {
             switch action {
             case .reject:
@@ -103,7 +103,7 @@ private extension CardView {
                 swipeRight()
             }
         } else {
-            
+
         }
     }
 }
@@ -115,7 +115,7 @@ private extension CardView {
     }
     func onDragEnded(_ value: _ChangedGesture<DragGesture>.Value) {
         let width = value.translation.width
-        
+
         if abs(width) <= abs(SizeConstant.screenCutoff) {
             returnToCenter()
             return

@@ -11,7 +11,7 @@ struct CardStackView: View {
     @EnvironmentObject var matchManager: MatchManager
     @State private var showMatchView = false
     @StateObject var viewModel = CardsViewModel(service: CardService())
-    
+
     var body: some View {
         NavigationStack {
             ZStack {
@@ -21,18 +21,18 @@ struct CardStackView: View {
                             CardView(viewModel: viewModel, model: card)
                         }
                     }
-                    
+
                     if !viewModel.cardModels.isEmpty {
                         SwipeActionButtonView(viewModel: viewModel)
-                        
+
                     }
                 }
                 .blur(radius: showMatchView ? 20 : 0)
-                
+
                 if showMatchView {
                     UserMatchView(show: $showMatchView)
                 }
-                
+
             }
             .animation(.easeInOut, value: showMatchView)
             .onReceive(matchManager.$matchUser, perform: { user in

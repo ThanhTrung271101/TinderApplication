@@ -15,19 +15,19 @@ struct UserMatchView: View {
             Rectangle()
                 .fill(.black.opacity(0.7))
                 .ignoresSafeArea()
-            
+
             VStack(spacing: 120) {
                 VStack {
                     Text("It's a Match!")
                         .font(.largeTitle)
                         .fontWeight(.bold)
-                        
+
                     if let matchUser = matchManager.matchUser {
                         Text("You and \(matchUser.fullName) have liked each other.")
                     }
                 }
                 .foregroundStyle(Color(.white))
-                
+
                 HStack(spacing: 16) {
                     Image(MockData.users[0].profileImageUrls[0])
                         .resizable()
@@ -39,7 +39,7 @@ struct UserMatchView: View {
                                 .stroke(.white, lineWidth: 2)
                                 .shadow(radius: 4)
                         }
-                    
+
                     if let matchUser = matchManager.matchUser {
                         Image(matchUser.profileImageUrls[1])
                             .resizable()
@@ -53,9 +53,9 @@ struct UserMatchView: View {
                             }
                     }
                 }
-                
+
                 VStack(spacing: 16) {
-                    
+
                     Button {
                         show.toggle()
                     } label: {
@@ -67,7 +67,7 @@ struct UserMatchView: View {
                     .frame(width: 350, height: 44)
                     .background(Color(.systemPink))
                     .clipShape(Capsule())
-                    
+
                     Button {
                         show.toggle()
                     } label: {
